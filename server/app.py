@@ -109,17 +109,17 @@ api.add_resource(PowerById, '/powers/<int:id>')
 
 
 class HeroPower(Resource):
-    def post(self):
-        data = request.get_json()
-        new_power =HeroPower(
-            strength=data["name"],
-            power_id=data["power_id"],
-            hero_id=data["hero_id"],
-            
+     def post(self):
+        new_heropower=HeroPower(
+        strength=request.form['strength'],
+        power_id=request.form['power_id'],
+        hero_id=request.form['hero_id']
         )
-        db.session.add(new_power)
+        
+        db.session.add(new_heropower)
         db.session.commit()
-        return make_response(new_power.to_dict(), 201)
+        response =HeroById(new_heropower.hero_id)
+        return make_response(response,201)
 api.add_resource(HeroPower, '/hero_powers')
 
 if __name__ == '__main__':
