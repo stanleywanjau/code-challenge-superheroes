@@ -55,7 +55,7 @@ class Hero(db.Model, SerializerMixin):
     def __repr__(self):
         return f"\nSuperhero name: {self.name}\nSuper name: {self.super_name}\nCreated at: {self.created_at}\n"
 
-class HeroPower(db.Model):
+class HeroPower(db.Model, SerializerMixin):
     __tablename__ = 'heropower'
   
     id = db.Column(db.Integer, primary_key=True)
