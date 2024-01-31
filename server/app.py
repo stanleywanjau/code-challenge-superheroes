@@ -91,16 +91,14 @@ class PowerById(Resource):
         if 'description' in request.json:
             power.description = request.json['description']
 
-            try:
-                db.session.commit()
-                return make_response(jsonify({
-                    "id": power.id,
-                    "name": power.name,
-                    "description": power.description
-                }), 200)
-            except Exception as e:
-                db.session.rollback()
-                return make_response(jsonify({"errors": ["Validation errors"]}), 400)
+            
+            db.session.commit()
+            return make_response(jsonify({
+            "id": power.id,
+            "name": power.name,
+            "description": power.description
+            }), 200)
+           
         else:
             return make_response(jsonify({"errors": ["Description not provided"]}), 400)
         
