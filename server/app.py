@@ -124,12 +124,10 @@ class HeroPowerResource(Resource):
 
         hero_power = HeroPower(strength=strength, hero=hero, power=power)
 
-        try:
-            db.session.add(hero_power)
-            db.session.commit()
-        except Exception as e:
-            db.session.rollback()
-            return make_response(jsonify({"errors": ["Failed to create HeroPower"]}), 500)
+        
+        db.session.add(hero_power)
+        db.session.commit()
+        
 
         return make_response(jsonify({"message": "HeroPower created successfully"}), 201)
 api.add_resource(HeroPowerResource, '/hero_powers')
